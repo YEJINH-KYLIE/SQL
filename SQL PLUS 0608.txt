@@ -1,0 +1,5 @@
+-- SQLPLUS 실행
+
+Sys 사용자 실행 : sqlplus sys/비밀번호 as sysdbba
+System 사용자 실행 : sqlplus system/비밀번호
+특정사용자 실행 : sqlplus 사용자명/비밀번호
