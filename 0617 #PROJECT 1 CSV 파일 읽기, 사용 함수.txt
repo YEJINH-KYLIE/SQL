@@ -1,0 +1,39 @@
+0617 #PROJECT 1 CSV 파일 읽기, 사용 함수
+
+1. csv 파일을 dat1 이름으로 불러오기
+
+dat1 <- read.csv(file = "/Users/yejinhwang/Desktop/NANO DEGREE/4th_Competition/day_care_center.csv", header = T)
+
+
+
+2. 서울특별시' 행만 따로 뽑아낸 명령어
+
+traindata2 <- subset(traindata, city == '서울특별시')
+subset(데이터프레임 이름, 컬럼명 == '원하는 값'
+
+
+3. 데이터 프레임 구조 확인 (쉬운 컬럼 확인)
+
+str(object = 데이터프레임 이름)
+
+
+
+4. 불필요한 열 삭제
+
+* DAY CARE : day_care_type 컬럼 뒤에 있는 모든 열 삭제
+
+> care_seoul <- care_seoul[,1:4]> str(object = care_seoul)'data.frame':	5656 obs. of  4 variables: $ city         : chr  "서울특별시" "서울특별시" "서울특별시" "서울특별시" ... $ gu           : chr  "서대문구" "서대문구" "서대문구" "서대문구" ... $ day_care_name: chr  "가람어린이집" "가좌제일어린이집" "경찰청어린이집" "고운햇살어린이집" ... $ day_care_type: chr  "국공립" "국공립" "직장" "가정" ...
+
+
+* TRAIN : appartment_id / jibun / transaction_date / addr_kr 열 삭제 
+
+> traindata_seoul <- traindata_seoul[, -c(2,5,7,11)]> str(object = traindata_seoul)'data.frame':	742285 obs. of  9 variables: $ transaction_id        : int  0 1 2 3 4 5 6 7 8 9 ... $ city                  : chr  "서울특별시" "서울특별시" "서울특별시" "서울특별시" ... $ dong                  : chr  "신교동" "필운동" "필운동" "내수동" ... $ apt                   : chr  "신현(101동)" "사직파크맨션" "두레엘리시안" "파크팰리스" ... $ exclusive_use_area    : num  84.8 99.2 84.7 146.4 194.4 ... $ year_of_completion    : int  2002 1973 2007 2003 2004 2006 2006 2006 2006 2006 ... $ transaction_year_month: int  200801 200801 200801 200801 200801 200801 200801 200801 200801 200801 ... $ floor                 : int  2 6 6 15 3 16 7 7 15 7 ... $ transaction_real_price: int  37500 20000 38500 118000 120000 67000 50270 46000 35368 46800 ...
+
+
+* PARK : park_area 컬럼 뒤 모든 열 삭제 
+
+> park_seoul <- park_seoul[,1:5]> str(object = park_seoul)'data.frame':	930 obs. of  5 variables: $ city     : chr  "서울특별시" "서울특별시" "서울특별시" "서울특별시" ... $ gu       : chr  "서초구" "서초구" "서초구" "서초구" ... $ dong     : chr  "반포동" "양재동" "양재동" "양재동" ... $ park_name: chr  "반  포" "방아다리1" "방아다리2" "양재천" ... $ park_type: chr  "근린공원" "근린공원" "근린공원" "근린공원" ...
+
+
+5. csv파일 내보내기
+write.csv(데이터프레임명, "저장할위치경로_파일명.csv")
