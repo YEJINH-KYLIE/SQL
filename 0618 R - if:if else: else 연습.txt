@@ -1,0 +1,9 @@
+0618 R - if/if else/ else 연습
+
+
+
+if(class(x = 3)=='integer'){+   print(x = '정수입니다!')+ } else if(class (x = 3) == 'numeric'){+   print (x = '실수입니다!')+   }else{print(x = '숫자가 아닙니다')}[1] "실수입니다!"
+
+> if(class(x = 'A')=='integer'){+   print(x = '정수입니다!')+ } else if(class (x = 3) == 'numeric'){+   print (x = '실수입니다!')+   }else{print(x = '숫자가 아닙니다')}[1] "실수입니다!"
+
+> if(class(x = 'A')=='integer'){+   print(x = '정수입니다!')+ } else if(class (x = 'A') == 'numeric'){+   print (x = '실수입니다!')+   }else{print(x = '숫자가 아닙니다')}[1] "숫자가 아닙니다"
