@@ -6,7 +6,7 @@
 
 * 빈도수 구하기
 
-table(x = stat$팀명)xHero  KIA   KT   LG   NC   SK 두산 롯데 삼성 한화   22   36   28   28   31   32   28   33   30   32 > prop.table(x = table(x = stat$팀명))x      Hero        KIA         KT         LG         NC         SK       두산       롯데 0.07333333 0.12000000 0.09333333 0.09333333 0.10333333 0.10666667 0.09333333 0.11000000       삼성       한화 0.10000000 0.10666667 > round(x = prop.table(x = table(x = stat$팀명)), digit = 3 )x Hero   KIA    KT    LG    NC    SK  두산  롯데  삼성  한화 0.073 0.120 0.093 0.093 0.103 0.107 0.093 0.110 0.100 0.107 
+table(x = stat$팀명)xHero  KIA   KT   LG   NC   SK 두산 롯데 삼성 한화   22   36   28   28   31   32   28   33   30   32 > prop.table(x = table(x = stat$팀명))x      Hero        KIA         KT         LG         NC         SK       두산       롯데 0.07333333 0.12000000 0.09333333 0.09333333 0.10333333 0.10666667 0.09333333 0.11000000       삼성       한화 0.10000000 0.10666667 > round(x = prop.table(x = table(x = stat$팀명)), digit = 3 )x Hero   KIA    KT    LG    NC    SK  두산  롯데  삼성  한화 0.073 0.120 0.093 0.093 0.103 0.107 0.093 0.110 0.100 0.107 
 
 
 
