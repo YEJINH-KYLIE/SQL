@@ -1,0 +1,17 @@
+0623 R : Join (각각의 컬럼명 통일)
+
+
+> imsi <- left_join(x = stat, y = teaminfo, by = '팀명')
+
+: 처음 imsi 로 join 했을 때, 두 테이블의 팀명이 통일되어 있지 않아서 N/A 값이 많이 생성되었다.
+이런 경우 팀명을 align 해주어야 한다. 
+
+
+> teaminfo$팀명[teaminfo$팀명 == 'kt'] <- 'KT'
+> stat$팀명[stat$팀명 == 'Hero'] <- '키움'
+
+: 위와 같이 통일이 안된 팀명을 수정하여, 하기와 같이 통일함 
+
+
+> table(teaminfo$팀명) KIA   KT   LG   NC   SK 두산 롯데 삼성 키움 한화    1    1    1    1    1    1    1    1    1    1 
+> table(stat$팀명) KIA   KT   LG   NC   SK 두산 롯데 삼성 키움 한화   36   28   28   31   32   28   33   30   22   32 
