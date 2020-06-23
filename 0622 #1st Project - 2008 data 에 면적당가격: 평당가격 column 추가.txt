@@ -11,5 +11,5 @@ apt_data_2008$real_price_per_area <- round(x = apt_data_2008$transaction_real_pr
 
 
 * 평당가격 칼럼 추가
-apt_data_2008$평당가격 <- round(x = apt_data_2008$real_price_per_area/3.3, digit = 2) 
+apt_data_2008$평당가격 <- round(x = apt_data_2008$real_price_per_area*3.3, digit = 2) 
 
