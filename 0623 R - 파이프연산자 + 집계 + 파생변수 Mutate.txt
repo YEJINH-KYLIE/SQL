@@ -1,0 +1,4 @@
+0623 R : 파이프연산자 + 집계 + 파생변수 Mutate
+
+
+> stat %>% +   group_by(팀명) %>% +   summarize(인원 = n(),+               팀홈런 = sum(홈런)) %>% +   mutate(평균홈런 = round(x = 팀홈런/인원, digit = 2L))`summarise()` ungrouping output (override with `.groups` argument)# A tibble: 10 x 4   팀명   인원 팀홈런 평균홈런   <chr> <int>  <dbl>    <dbl> 1 Hero     22    112     5.09 2 KIA      36     76     2.11 3 KT       28    103     3.68 4 LG       28     94     3.36 5 NC       31    128     4.13 6 SK       32    117     3.66 7 두산     28     84     3    8 롯데     33     90     2.73 9 삼성     30    122     4.0710 한화     32     88     2.75
