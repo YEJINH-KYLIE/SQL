@@ -1,0 +1,12 @@
+0623 R : 파이프연산자 + 파생컬럼생성+if_else/case_when 
+
+
+> stat %>% +   select(이름, 타석) %>% +   mutate(규정타석 = if_else(condition = 타석 >= 144*3.1,+                         true = '이상',+                         false = '미만'))# A tibble: 300 x 3   이름        타석 규정타석   <chr>      <dbl> <chr>    1 양의지       459 이상     2 김하성       625 이상     3 최정         606 이상     4 샌즈         613 이상     5 로하스       578 이상     6 박병호       532 이상     7 페르난데스   645 이상     8 이정후       630 이상     9 박민우       526 이상    10 강백호       505 이상    # … with 290 more rows
+
+
+
+> stat %>% +   select(팀명,이름, 타석) %>% +   mutate(규정타석 = if_else(condition = 타석 >= 144*3.1,+                         true = '이상',+                         false = '미만')) %>% +   group_by(팀명,규정타석) %>% +   summarize(구분 = n())`summarise()` regrouping output by '팀명' (override with `.groups` argument)# A tibble: 20 x 3# Groups:   팀명 [10]   팀명  규정타석  구분   <chr> <chr>    <int> 1 Hero  미만        17 2 Hero  이상         5 3 KIA   미만        32 4 KIA   이상         4 5 KT    미만        22 6 KT    이상         6 7 LG    미만        22 8 LG    이상         6 9 NC    미만        2910 NC    이상         211 SK    미만        2512 SK    이상         713 두산  미만        2014 두산  이상         815 롯데  미만        3016 롯데  이상         317 삼성  미만        2418 삼성  이상         619 한화  미만        2520 한화  이상         7
+
+
+
+> stat %>% +   select(이름, 홈런) %>% +   mutate(타입 = case_when(홈런 >= 20 ~ '거포',+                           홈런>= 10 ~ '주전',+                           홈런 >= 0 ~ '똑딱이'))# A tibble: 300 x 3   이름        홈런 타입     <chr>      <dbl> <chr>  1 양의지        20 거포   2 김하성        19 주전   3 최정          29 거포   4 샌즈          28 거포   5 로하스        24 거포   6 박병호        33 거포   7 페르난데스    15 주전   8 이정후         6 똑딱이 9 박민우         1 똑딱이10 강백호        13 주전  # … with 290 more rows
