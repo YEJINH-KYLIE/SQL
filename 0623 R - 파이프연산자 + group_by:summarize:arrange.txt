@@ -1,0 +1,16 @@
+0623 R : 파이프연산자 + group_by/summarize/arrange
+
+
+
+*  팀 별 최다 삼진을 알아본 후, 그 팀의 최다 삼진 선수 알아보기 
+
+> stat %>% +   group_by(팀명) %>% +   summarise(최다삼진 = max(삼진)) %>% +   arrange(desc(x = 최다삼진))`summarise()` ungrouping output (override with `.groups` argument)# A tibble: 10 x 2   팀명  최다삼진   <chr>    <dbl> 1 KT         120 2 Hero       117 3 SK         117 4 한화       114 5 LG         113 6 두산       113 7 롯데       107 8 KIA         92 9 삼성        8910 NC          80
+
+> stat %>% +   filter(팀명 == 'LG' & 삼진 == 113) %>% +   select(이름)# A tibble: 1 x 1  이름    <chr> 1 오지환
+
+
+
+* 팀 별 최다 삼진 선수 select 로 칼럼 추출 
+
+
+> stat %>% +   select (팀명, 이름, 삼진) %>% +   arrange(desc(x = 삼진)) %>% +   distinct(팀명,.keep_all = T)# A tibble: 10 x 3   팀명  이름     삼진   <chr> <chr>   <dbl> 1 KT    로하스    120 2 Hero  박병호    117 3 SK    로맥      117 4 한화  이성열    114 5 LG    오지환    113 6 두산  김재환*   113 7 롯데  강로한    107 8 KIA   이창진     92 9 삼성  이학주     8910 NC    노진혁     80
