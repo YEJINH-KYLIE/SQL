@@ -1,0 +1,5 @@
+0625 #1st PROJECT, 열 더하기 (2008/2019 MAX/MEAN/MIN)
+
+max_price_2008_and_2019 <- cbind(max_price_2008, max_price_2019)
+mean_price_2008_and_2019 <- cbind(mean_price_2008, mean_price_2019)
+min_price_2008_and_2019 <- cbind(min_price_2008, min_price_2019)
