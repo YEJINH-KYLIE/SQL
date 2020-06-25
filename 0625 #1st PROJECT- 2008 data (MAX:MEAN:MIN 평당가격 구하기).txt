@@ -1,0 +1,5 @@
+0625 #1st PROJECT: 2008 data (MAX/MEAN/MIN 평당가격 구하기)
+
+> max_price_2008 <- apt_data_2008 %>%+   select(시군구, 법정동, 아파트, 층, 평당가격) %>%+   arrange(desc(x = 평당가격)) %>%+   distinct(시군구, .keep_all = TRUE)
+> min_price_2008 <- apt_data_2008 %>%+   select(시군구, 법정동, 아파트, 층, 평당가격) %>%+   arrange(x = 평당가격) %>%+   distinct(시군구, .keep_all = TRUE)
+> mean_price_2008 <- apt_data_2008 %>%+   group_by(시군구) %>%+   summarise(평당가격 = mean(평당가격))
