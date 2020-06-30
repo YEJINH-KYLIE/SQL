@@ -1,0 +1,42 @@
+0630 #1st Project : 구별 군집화
+
+* 군집기준 _ 평당가격 중앙값 편차 내림차순
+
+1순위 _ 강남, 성동, 마포, 서초, 송파, 동작
+2순위 _ 광진, 강동, 용산, 영등포, 중구, 양천
+3순위 _ 서대문구, 강서구, 종로구, 동대문구, 성북구, 관악구
+4순위 _ 은평구, 구로구, 노원구, 중랑구, 강북구, 금천구, 도봉구
+
+
+* 군집화 기준 코드
+
+apt_max_08 <- read.csv(file = 'max_price_2008.csv')
+apt_mean_19 <- read.csv(file = 'apt_data_2019_200624.csv')
+
+apt_max_08 <- apt_max_08 %>%
+  arrange(apt_max_08$평당가격)
+
+apt_median_2019 <- apt_mean_19 %>%
+  group_by(시군구) %>%
+  summarise(median19 = median(평당가격, na.rm = FALSE))
+
+
+apt_median_08 <- apt_per_price_08 %>%
+  group_by(시군구) %>%
+  summarise(median08 = median(평당가격, na.rm = FALSE))
+
+
+medians_08vs19 <- cbind(apt_median_08, apt_median_2019)
+
+medians_08vs19$median19 <- medians_08vs19$median19*100
+
+medians_08vs19$vs <- medians_08vs19$median19 - medians_08vs19$median08
+
+
+
+* 08년도 산점도 그래프(1,2,3,4순위별)
+
+ggplot(data = apt_price_floor, mapping = aes(x = apt_price_floor$평당가격, y = apt_price_floor$층)) + geom_point(aes(color = apt_price_floor$순위))
+
+
+> View(scatterplot_2019_floor_grouping)> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '광진'] = '2순위'> View(scatterplot_2019_floor_grouping)> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '강동'] = '2순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '용산'] = '2순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,3) == '영등포'] = '2순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '중구'] = '2순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '양천'] = '2순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,3) == '서대문'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '강서'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '종로'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,3) == '동대문'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '성북'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '관악'] = '3순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '은평'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '구로'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '노원'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '중랑'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '강북'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '금천'] = '4순위'> scatterplot_2019_floor_grouping$순위[substr(scatterplot_2019_floor_grouping$시군구, 1,2) == '도봉'] = '4순위'> 
