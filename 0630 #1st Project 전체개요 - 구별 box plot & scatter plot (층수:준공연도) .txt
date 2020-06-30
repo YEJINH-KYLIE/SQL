@@ -1,0 +1,29 @@
+0630 #1st Project 전체개요 - 구별 box plot & scatter plot (층수/준공연도)
+
+1. 구별 box plot (2008 vs 2019)
+
+구별 MAX/MEAN/MIN box plot 의 연도 별 비교를 통해 군집화의 근거를 얻는다. 
+결국 마지막 마케팅 전략을 위한 grouping  작업의 근거도 이 전제적 box plot 비교를 통한 개요로 얻을 수 있다. 
+
+* 함수 : 
+
+ggplot(graphtest1, aes(x = 시군구, y = 평당가격, fill = 시군구)) + geom_boxplot()
+--fill 은 면적에 색을 채워줍니다--
+
+
+
+
+
+2. 2019 가격/준공년도에 따른 구별 평당 가격 분포도 
+
+가격 분포에 영향을 미칠 요인을 구분해 시각화함으로써 변수의 근거에 대한 큰 줄기를 얻는다. 
+
+* 함수 :  
+> ggplot(data = scatterplot_2019_floor, mapping = aes(x = scatterplot_2019_floor$평당가격, y = scatterplot_2019_floor$층)) + geom_point(aes(color = scatterplot_2019_floor$시군구))
+
+
+
+* 함수 : 
+> ggplot(data = scatterplot_2019_builtdate, mapping = aes(x = scatterplot_2019_builtdate$평당가격, y = scatterplot_2019_builtdate$건축년도)) + geom_point(aes(color = scatterplot_2019_builtdate$시군구))
+
+
