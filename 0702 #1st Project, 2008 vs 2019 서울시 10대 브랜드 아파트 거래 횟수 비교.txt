@@ -1,0 +1,84 @@
+0702 #1st Project, 2008 vs 2019 서울시 10대 브랜드 아파트 거래 횟수 비교
+
+
+2019 서울시 전체 10대 브랜드 아파트 개수 : 9,322 개
+
+* 자이 
+> sum(str_count(string = apt_data_2019$아파트, pattern = '자이'))[1] 870
+
+* 이편한세상
+> sum(str_count(string = apt_data_2019$아파트, pattern = '편한'))[1] 907
+
+* 래미안
+> sum(str_count(string = apt_data_2019$아파트, pattern = '래미안')) [1] 2896
+
+* 힐스테이트
+> sum(str_count(string = apt_data_2019$아파트, pattern = '힐스'))  [1] 1351
+
+* 롯데캐슬
+> sum(str_count(string = apt_data_2019$아파트, pattern = '캐슬'))[1] 820
+
+* 푸르지오
+> sum(str_count(string = apt_data_2019$아파트, pattern = '푸르지오'))[1] 1036
+
+* 더샵
+> sum(str_count(string = apt_data_2019$아파트, pattern = '더샵'))[1] 187
+
+* 아이파크
+> sum(str_count(string = apt_data_2019$아파트, pattern = '아이파크'))[1] 612
+> sum(str_count(string = apt_data_2019$아파트, pattern = 'IPARK'))[1] 9
+
+* sk뷰
+> sum(str_count(string = apt_data_2019$아파트, pattern = 'SK뷰'))[1] 7
+> sum(str_count(string = apt_data_2019$아파트, pattern = 'SKVIEW'))[1] 15
+
+* 호반서밋
+> sum(str_count(string = apt_data_2019$아파트, pattern = '호반'))[1] 0
+
+[2019 전체합계]
+> sum(sum(str_count(string = apt_data_2019$아파트, pattern = '자이')), sum(str_count(string = apt_data_2019$아파트, pattern = '편한')), sum(str_count(string = apt_data_2019$아파트, pattern = '래미안')), sum(str_count(string = apt_data_2019$아파트, pattern = '힐스')), sum(str_count(string = apt_data_2019$아파트, pattern = '캐슬')), sum(str_count(string = apt_data_2019$아파트, pattern = '푸르지오')), sum(str_count(string = apt_data_2019$아파트, pattern = '더샵')), sum(str_count(string = apt_data_2019$아파트, pattern = '아이파크')), sum(str_count(string = apt_data_2019$아파트, pattern = 'SK뷰')), sum(str_count(string = apt_data_2019$아파트, pattern = 'SKVIEW')), sum(str_count(string = apt_data_2019$아파트, pattern = '아이파크')), sum(str_count(string = apt_data_2019$아파트, pattern = 'IPARK')), sum(str_count(string = apt_data_2019$아파트, pattern = '호반')))[1] 9322
+
+
+2008 서울시 전체 10대 브랜드 아파트 개수 :  5,365 개
+
+* 자이
+> sum(str_count(string = apt_data_2008$아파트, pattern = '자이'))[1] 173
+
+* 이편한세상
+> sum(str_count(string = apt_data_2008$아파트, pattern = '편한'))[1] 550
+
+* 래미안
+> sum(str_count(string = apt_data_2008$아파트, pattern = '래미안')) [1] 1607
+
+* 힐스테이트
+> sum(str_count(string = apt_data_2008$아파트, pattern = '힐스'))  [1] 292
+
+* 롯데캐슬
+> sum(str_count(string = apt_data_2008$아파트, pattern = '캐슬'))[1] 631
+
+* 푸르지오
+> sum(str_count(string = apt_data_2008$아파트, pattern = '푸르지오'))[1] 794
+
+* 더샵
+> sum(str_count(string = apt_data_2008$아파트, pattern = '더샵'))[1] 86
+
+* 아이파크
+> sum(str_count(string = apt_data_2008$아파트, pattern = '아이파크'))[1] 607
+> sum(str_count(string = apt_data_2008$아파트, pattern = 'IPARK'))[1] 18
+
+* sk뷰
+> sum(str_count(string = apt_data_2008$아파트, pattern = 'SK뷰'))[1] 0> sum(str_count(string = apt_data_2008$아파트, pattern = 'SKVIEW'))[1] 0
+
+* 호반서밋
+> sum(str_count(string = apt_data_2008$아파트, pattern = '호반'))[1] 0
+
+[2008 전체합계]
+
+sum(sum(str_count(string = apt_data_2008$아파트, pattern = '자이')),sum(str_count(string = apt_data_2008$아파트, pattern = '편한')), sum(str_count(string = apt_data_2008$아파트, pattern = '래미안')), sum(str_count(string = apt_data_2008$아파트, pattern = '힐스')), sum(str_count(string = apt_data_2008$아파트, pattern = '캐슬')), sum(str_count(string = apt_data_2008$아파트, pattern = '푸르지오')), sum(str_count(string = apt_data_2008$아파트, pattern = '더샵')), sum(str_count(string = apt_data_2008$아파트, pattern = '아이파크')), sum(str_count(string = apt_data_2008$아파트, pattern = 'SK뷰')), sum(str_count(string = apt_data_2008$아파트, pattern = 'SKVIEW')), sum(str_count(string = apt_data_2008$아파트, pattern = '아이파크')), sum(str_count(string = apt_data_2008$아파트, pattern = 'IPARK')), sum(str_count(string = apt_data_2008$아파트, pattern = '호반')))[1] 5365
+
+# 상기 내용으로 데이터프레임 만들기 
+brand_apt_number_2008_and_2019 <- data.frame(브랜드명 = c('자이','e편한세상','래미안','힐스테이트','롯데캐슬','푸르지오','더샵','아이파크','SK뷰','호반서밋','전체합계'), 아파트개수_2008 = c(173, 550,1607,292,631,794,86,625,0,0,5365), 아파트개수_2019 = c(870, 907, 2896, 1351, 820, 1036,187,621,23,0,9322))
+
+
+
+
