@@ -1,0 +1,26 @@
+0707 #1st P : 2008-2019 평당가격 중위값 변화 그래프 Final 
+
+
+# 2008년 그래프를 먼저 그려주면서 2019 그래프까지 겹칠 것 고려하여 y 축 범위 설정을 함께합니다.
+
+> plot(x = sort(x = apt_data_08vs19_0706$medians08),+      ann = F, —> 축이름/제목 생략 함수 +      type = 'o',+      ylab = 'medians08',+      ylim = c(1000,7000), —> 2008 최소값/2019 최대값 포함 범위로 설정+      pch = 19,+      col = 'green',+      main = '거래횟수 & 평당가격중위값'+      )
+
+
+# 꺽은선 그래프에 2008년 중위값 오름차순에 따른 구이름 추가
+> text(x = sort(x= apt_08vs09_data_0702$medians08),+      labels = apt_median08$시군구,+      pos = 3,+      cex = 0.5,+      col = 'green')
+
+
+# 라인 함수로 2019 그래프 겹치기
+> lines(x = sort(x = apt_08vs09_data_0702$median19),+      type = 'o',+      ylab = 'median19',+      pch = 19,+      col = 'red'+ )
+
+
+# 꺽은선 그래프에 2029년 중위값 오름차순에 따른 구이름 추가
+> text(x = sort(x= apt_08vs09_data_0702$median19),+      labels = apt_median19$시군구,+      pos = 3,+      cex = 0.5,+      col = 'red')
+
+
+# 범례추가
+> legend('topleft', title = '년도', legend = c(2019,2008), fill = 2:3, cex = 0.7)
+
+
+# 그래프 축이름 추가
+> title(main = '2008-2019 평당가격중위값 변화',+       xlab = '시군구',+       ylab = '평당가격중위값',+       cex.main = 1,+       cex.lab = 0.7)
