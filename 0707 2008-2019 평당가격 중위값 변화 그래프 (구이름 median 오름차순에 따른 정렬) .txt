@@ -1,0 +1,20 @@
+0707 2008-2019 평당가격 중위값 변화 그래프 (구이름 median 오름차순에 따른 정렬) 
+
+구이름을 그래프에 추가했을 때 구이름이 가나다 순으로 들어가는 문제가 있었다. 
+이 문제 수정을 위해 따로 dplyr 패키지 사용하여 칼럼을 뺴서 median 오름차순으로 구이름 정렬하였고,
+이를 다시 텍스트 추가하였다. 
+
+# dplyr 사용하여 arrange ’시군구’ according to ‘median’
+ 
+apt_median08 <- apt_08vs09_data_0702 %>% 
+  select(시군구, medians08) %>% 
+  arrange(x = medians08)
+
+
+# 구이름 추가 
+
+text(x = sort(x= apt_08vs09_data_0702$trans08),
+     labels = apt_median08$시군구,
+     pos = 3,
+     cex = 0.5,
+     col = 'red')
