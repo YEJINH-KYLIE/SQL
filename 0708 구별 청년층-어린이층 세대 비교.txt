@@ -1,0 +1,48 @@
+0708 구별 청년층-어린이층 세대 비교
+
+
+plot(x = sort(x = apt_08vs09_data_0708$어린이), 
+     ann = F,
+     type = 'o',
+     ylab = '어린이', 
+     ylim = c(5000,200000),
+     pch = 19, col = 'green',
+     main = '거래횟수 & 평당가격중위값')
+
+text(x = sort(x= apt_08vs09_data_0708$어린이),
+     labels = seoul_child_19$시군구,
+     pos = 3,
+     cex = 0.5,
+     col = 'green')
+
+seoul_child_19 <- apt_08vs09_data_0708 %>% 
+  select(시군구, 어린이) %>% 
+  arrange(x = 어린이)
+
+lines(x = sort(x = apt_08vs09_data_0708$청년),
+      type = 'o', 
+      ylab = '청년', 
+      pch = 19, 
+      col = 'red'
+      )
+
+seoul_adult_19 <- apt_08vs09_data_0708 %>% 
+  select(시군구, 청년) %>% 
+  arrange(x = 청년)
+
+
+text(x = sort(x= apt_08vs09_data_0708$청년),
+     labels = seoul_adult_19$시군구,
+     pos = 3,
+     cex = 0.5,
+     col = 'red')
+
+
+legend('topleft', title = '세대', legend = c('청년','어린이'), fill = 2:3, cex = 0.7)
+
+
+title(main = '구별 청년층-어린이 세대 통계',
+      xlab = '시군구', 
+      ylab = '인구수', 
+      cex.main = 1, 
+      cex.lab = 0.7)
