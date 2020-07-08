@@ -1,0 +1,24 @@
+0708 1st Project, 인구통계 파일 전처리 & 기존 파일에 합치기 
+
+library(readxl)
+seoul_age_test <- read_xlsx(path = '/Users/yejinhwang/Desktop/NANO DEGREE/1st Project/4th_Competition/seoul_age_gu_2019.xlsx')
+
+seoul_ppl_age_2019_Q3_by_gu_numeric <- seoul_age_test
+
+
+# 나이대 별 칼럼을 새로운 칼럼으로 합치기
+
+library(dplyr)
+seoul_population_2019 <- seoul_ppl_age_2019_Q3_by_gu_numeric %>% 
+  mutate(어린이= seoul_ppl_age_2019_Q3_by_gu_numeric$`0세~4세`+ seoul_ppl_age_2019_Q3_by_gu_numeric$`5~9세`, 청소년 = seoul_ppl_age_2019_Q3_by_gu_numeric$`10~14세`+seoul_ppl_age_2019_Q3_by_gu_numeric$`15~19세`, 청년 = seoul_ppl_age_2019_Q3_by_gu_numeric$`30~34세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`35~39세`+ seoul_ppl_age_2019_Q3_by_gu_numeric$`40~44세`, 장년 = seoul_ppl_age_2019_Q3_by_gu_numeric$`45~49세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`50~54세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`55~59세`, 노년 = seoul_ppl_age_2019_Q3_by_gu_numeric$`60~64세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`65~69세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`70~74세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`75~79세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`80~84세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`85~89세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`90~94세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`95~99세` + seoul_ppl_age_2019_Q3_by_gu_numeric$`100세 이상` )
+
+# 필요한 열 추출
+seoul_population_2019_Q3 <- seoul_population_2019[-c(26),c(3,5,27:31)]
+
+# 기존 전처리 파일과 합치기 
+apt_08vs09_data_0708 <- cbind(apt_data_08vs19_0706,seoul_population_2019_Q3[,2:7])
+
+
+
+
+
