@@ -1,0 +1,214 @@
+
+0718 R 시각화 : GGPLOT 연습
+
+# Project
+
+
+# HDI, Human Development Inde : 각 국가의 실질국민소득, 교육수준, 문맹율, 평균수명 등을 여러 가지 인간의 삶과 관련된 지표를 조사해 각국의 인간 발전 정도와 선진화 정도를 평가한 지수
+# CPI, Corruption Perceptions Index : 부패지수
+
+getwd()
+setwd(dir = '/Users/yejinhwang/RVISUALIZATION_SAT/data/lsp202007_w2/data/week02')
+
+#dat <- read_csv("./data/week02/EconomistData.csv")
+dat <- read.csv("./EconomistData.csv")
+
+
+# 원형 제작
+
+# 산점도
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point()
+
+# 색깔 지정 : 할당과 매핑
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point(color = "blue")
+
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point(aes(color = Region))
+
+# 크기 지정
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point(aes(color = Region), size = 2)
+
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point(aes(color = Region, size =  HDI.Rank))
+
+
+# 추세선 넣기
+
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point() +
+  geom_smooth()
+
+ggplot(dat, aes(x = CPI, y = HDI)) +
+  geom_point() +
+  geom_line(stat = "smooth", method = "loess")
+
+
+# 이름 지정 : x축, y축, 범례 제목
+ggplot(dat, aes(x = CPI, y = HDI, color = Region)) +
+  geom_point() +
+  scale_x_continuous(name = "Corruption Perception Index") +
+  scale_y_continuous(name = "Human Development Index") +
+  scale_color_discrete(name = "Region of the world")
+
+# 대륙별로 원하는 색상 지정하기
+ggplot(dat, aes(x = CPI, y = HDI, color = Region)) +
+  geom_point() +
+  scale_x_continuous(name = "Corruption Perception Index") +
+  scale_y_continuous(name = "Human Development Index") +
+  scale_color_manual(name = "Region of the world",
+                     values = c("#24576D",
+                                "#099DD7",
+                                "#28AADC",
+                                "#248E84",
+                                "#F2583F",
+                                "#96503F"))
+
+
+# 프로젝트 수행 내용
+# 추세선 넣기
+# 점의 시각 변환
+# 대륙 표시 변경 : factor 사용법
+# 적절한 점에 문자열 출력하기
+# 시각화 사용자화 : theme 수정
+# 각 축의 눈금 등의 수정
+# 범례 위치 수정
+# 표제목, 축제목, 범례 제목 등 수정하기
+# 각 축의 선(주선, 보조선) 배경 색 등을 변경하기
+# 후반 작업 필요
+
+
+
+# 기본 도표 제작 : pc1
+pc1 <- ggplot(dat, aes(x = CPI, y = HDI, color = Region))
+pc1 + geom_point()
+
+# 추세선 넣기 : pc2
+pc2 <- pc1 +
+  geom_smooth(mapping = aes(linetype = "r2"),
+              method = "lm",
+              formula = y ~ x + log(x), se = FALSE,
+              color = "red")
+pc2
+pc2 + geom_point()
+
+
+# 표시 객체 꾸미기 : 점의 형태, 색상 등 
+# R의 point 유형
+pts <- data.frame(x = 1:5 , y = 1:25, z = 1:25)
+s <- ggplot(pts, aes(x = x, y = y)) 
+
+s + geom_point(aes(shape = z), size = 4) + scale_shape_identity()
+
+# colour, fill 등의 인수 확인
+s + geom_point(aes(shape = z), size = 4, colour = "Red", fill = "Black") +
+  scale_shape_identity()
+
+# 속이 빈 원 (shape=1)의 크기는 2.5, 외곽선의 두께는 1.25가 되도록 그리기 : pc3
+pc3 <- pc2 + geom_point(shape = 1, size = 2.5, stroke = 1.25)
+pc3
+
+# 이름표 붙히기 : pc4, geom_text()
+lab2pts <- c("Russia", "Venezuela", "Iraq", "Myanmar", "Sudan", 
+             "Afghanistan", "Congo", "Greece", "Argentina", "Brazil", 
+             "India", "Italy", "China", "South Africa", "Spane", 
+             "Botswana", "Cape Verde", "Bhutan", "Rwanda", "France", 
+             "United States", "Germany", "Britain", "Barbados", "Norway", 
+             "Japan", "New Zealand", "Singapore")
+
+pc4 <- pc3 +
+  geom_text( aes(label = Country),
+             color = "gray20",
+             data = filter(dat, Country %in% lab2pts) )
+pc4
+
+
+
+# 겹치는 텍스트 위치 보정 : ggrepel 패키지의 geom_text_repel() 이용 : pc5
+library("ggrepel")
+pc5 <- pc3 +
+  geom_text_repel(aes(label = Country),
+                  color = "gray20",
+                  data = filter(dat, Country %in% lab2pts),
+                  force = 10)     # force 민감도? 겹치는 텍스트 사이의 반발력 기본값 1
+pc5
+
+
+# 대륙 이름표 변경하기
+str <- c("a", "b", "b", "e", "c")
+str
+factor( str )
+factor( str,
+        levels = c("a","b","c","e"),
+        labels = c("경기도", "서울시", "부산시", "강원도"))
+
+dat$Region <- factor(dat$Region,
+                     levels = c("EU W. Europe",
+                                "Americas",
+                                "Asia Pacific",
+                                "East EU Cemt Asia",
+                                "MENA",
+                                "SSA"),
+                     labels = c("OECD",
+                                "Americas",
+                                "Asia &\nOceania",
+                                "Central &\nEastern Europe",
+                                "Middle East &\nnorth Africa",
+                                "Sub-Saharan\nAfrica"))
+
+
+# 기존 ggplot 객체의 정보 수정하기
+pc5$data <- dat
+pc5
+
+
+# 축 수정 및 제목 붙히기 : pc6
+library(grid) # 함수 unit() 사용
+
+pc6 <- pc5 +
+    scale_x_continuous(name = "Corruption Perceptions Index, 2011 (10=least corrupt)",
+                       limits = c(.9, 10.5),
+                       breaks = 1:10) +
+    scale_y_continuous(name = "Human Development Index, 2011 (1=Best)",
+                       limits = c(0.2, 1.0),
+                       breaks = seq(0.2, 1.0, by = 0.1)) +
+    scale_color_manual(name = "",
+                       values = c("#24576D",
+                                  "#099DD7",
+                                  "#28AADC",
+                                  "#248E84",
+                                  "#F2583F",
+                                  "#96503F")) +
+    ggtitle("Corruption and Human development")
+
+pc6
+
+
+# 테마 수정하기 : pc7
+
+pc7 <- pc6 +
+  theme_minimal() + # 기본 테마는 minimal
+  theme(text = element_text(color = "gray20"),
+        # 범례 부분
+        legend.position = c("top"), 
+        legend.direction = "horizontal",
+        legend.justification = 0.1, # anchor point for legend.position.
+        legend.text = element_text(size = 11, color = "gray10"),
+        # 축 구성요소 변경
+        axis.text = element_text(face = "italic"),
+        axis.title.x = element_text(vjust = -1), # x 축과 간격 띄우기
+        axis.title.y = element_text(vjust = 2), # y 축과 간격 띄우기
+        axis.ticks.y = element_blank(), 
+        axis.line = element_line(color = "gray40", size = 0.5),
+        axis.line.y = element_blank(),
+        # 도표 배경 변경 
+        panel.background = element_rect(fill = "lightblue2",
+                                        colour = "lightblue2",
+                                        size = 0.5, linetype = "solid"),        
+        panel.grid.major = element_line(color = "gray50", size = 0.5),
+        panel.grid.major.x = element_blank()
+  )
+
+pc7
