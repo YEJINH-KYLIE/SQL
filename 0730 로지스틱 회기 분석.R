@@ -55,7 +55,11 @@ fitC$coefficients %>% exp()
 
 # 표준화 회기 계수 출력 
 library(reghelper)
-beta(model = fitC)
+beta <- beta(model = fitC)
+beta
+
+# 표준화 회기 계수에서 먼저 봐야할 것을 가독성있게 뽑아내기 
+beta$coefficients[,1] %>%  abs() %>% round(digits = 2L) %>% sort()
 
 # cut-off 를 임으로 0.5 로 입력하고, 목표변수의 추정확률 생성 과정
 # 시험셋으로 목표변수의 추정확률 생성
